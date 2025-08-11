@@ -3,25 +3,19 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node",
+      "use": "@vercel/static-build",
       "config": {
-        "includeFiles": ["dist/**"]
+        "distDir": "dist/public"
       }
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/public/$1"
+      "dest": "/index.html"
     }
-  ],
-  "functions": {
-    "dist/index.js": {
-      "maxDuration": 10
-    }
-  }
+  ]
 }
